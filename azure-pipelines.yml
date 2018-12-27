@@ -1,10 +1,15 @@
 resources:
-- repo: self
+  repositories:
+    - repository: string  # identifier (A-Z, a-z, 0-9, and underscore)
+      type: github
+      name: 'https://github.com/DustParticle/SsdSim.git'
+      ref: 'refs/heads/master'  # ref name to use, defaults to 'refs/heads/master'
+      endpoint: 'Github connection 1'  # name of the service connection to use (for non-Azure Repos types)
 
 queue:
   name: Hosted VS2017
   demands: msbuild
 
 steps:
-- task: MSBuild@1
-  displayName: 'Build solution /*.sln'
+- task: VSBuild@1
+  displayName: 'Build solution **/*.sln'
