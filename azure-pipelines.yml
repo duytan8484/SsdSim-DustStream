@@ -2,7 +2,7 @@ trigger:
 - master
 
 # Build with MSBuild
-- task: MSBuild@1
+- task: 'MSBuild'
   inputs:
     solution: '*.sln' 
     #msbuildLocationMethod: 'version' # Optional. Options: version, location
