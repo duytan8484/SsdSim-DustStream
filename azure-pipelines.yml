@@ -7,7 +7,7 @@ resources:
       endpoint: 'Github connection 1'  # name of the service connection to use (for non-Azure Repos types)
 
 jobs:
-- job: 'Build'
+- job: Build
   strategy:
     maxParallel: 2
     matrix: 
@@ -15,10 +15,12 @@ jobs:
         BuildConfiguration: release
         BuildPlatform: x64
         TestExe: './SsdSim/x64/Release/Test.exe'
+        ArtifactPath: './SsdSim/x64/Release/'
       x64_Debug:
         BuildConfiguration: debug
         BuildPlatform: x64
         TestExe: './SsdSim/x64/Debug/Test.exe'
+        ArtifactPath: './SsdSim/x64/Release/'
   steps:
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
@@ -30,7 +32,10 @@ jobs:
       configuration: $(BuildConfiguration)
       platform: $(BuildPlatform)
 
-- job: 'Test'
+- job: Test
+  dependsOn: 
+  - Build
+  condition: succeeded('Build')
   strategy:
     maxParallel: 2
     matrix:
@@ -41,4 +46,4 @@ jobs:
   steps:
   - powershell: $(TestExe)
   displayName: 'Running Tests'
-  dependsOn: 'Build'
+  
