@@ -31,6 +31,10 @@ jobs:
     inputs:
       configuration: $(BuildConfiguration)
       platform: $(BuildPlatform)
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: 'drop'
+      targetPath: $(ArtifactPath)
 
 - job: Test
   dependsOn: 
@@ -40,10 +44,13 @@ jobs:
     maxParallel: 2
     matrix:
       x64_Release:
-        TestExe: './SsdSim/x64/Release/Test.exe'
+        TestExe: $(System.DefaultWorkingDirectory)'Test.exe'
       x64_Debug:
-        TestExe: './SsdSim/x64/Debug/Test.exe'
+        TestExe: $(System.DefaultWorkingDirectory)'Test.exe'
   steps:
+  - task: DownloadPipelineArtifact@0
+    inputs:
+      targetPath: $(System.DefaultWorkingDirectory)
   - powershell: $(TestExe)
   displayName: 'Running Tests'
   
