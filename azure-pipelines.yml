@@ -18,3 +18,8 @@ steps:
     command: 'restore'
 - task: VSBuild@1
   displayName: 'Build solution **/*.sln'
+  inputs:
+    configuration: release
+    platform: x64
+- powershell: |
+    ./Release/x64/test.exe
