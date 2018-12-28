@@ -9,14 +9,16 @@ resources:
 jobs:
 - job: 'Main'
   strategy:
-    maxParallel: 1
+    maxParallel: 2
     matrix: 
       x64_Release:
         BuildConfiguration: release
         BuildPlatform: x64
+        TestExe: './SsdSim/x64/Release/Test.exe'
       x64_Debug:
         BuildConfiguration: debug
         BuildPlatform: x64
+        TestExe: './SsdSim/x64/Debug/Test.exe'
   steps:
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
@@ -27,5 +29,5 @@ jobs:
     inputs:
       configuration: $(BuildConfiguration)
       platform: $(BuildPlatform)
-  - powershell: ./SsdSim/x64/Release/Test.exe
+  - powershell: $(TestExe)
     displayName: 'Running Tests'
