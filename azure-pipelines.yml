@@ -11,8 +11,10 @@ queue:
   demands: msbuild
 
 steps:
-- checkout: self
 - powershell: |
     git clone https://github.com/DustParticle/SsdSim.git
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
 - task: VSBuild@1
   displayName: 'Build solution **/*.sln'
