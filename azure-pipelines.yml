@@ -22,5 +22,5 @@ steps:
     configuration: release
     platform: x64
 - script: |
-    ./SsdSim/x64/Release/Test.exe
+    SsdSim/x64/Release/Test.exe
   displayName: 'Running Tests'
