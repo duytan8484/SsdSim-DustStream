@@ -10,6 +10,13 @@ queue:
   name: Hosted VS2017
   demands: msbuild
 
+
+
 steps:
+- checkout: 'DustParticle/SsdSim'
+    clean: true
+    lfs: true  # whether to download Git-LFS files
+    submodules: recursive  # set to 'true' for a single level of submodules or 'recursive' to get submodules of submodules
+
 - task: VSBuild@1
-  displayName: 'Build solution **/*.sln'
+    displayName: 'Build solution **/*.sln'
