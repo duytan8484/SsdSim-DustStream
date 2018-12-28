@@ -22,4 +22,4 @@ steps:
     configuration: release
     platform: x64
 - powershell: |
-    ./x64/Release/Test.exe
+    ./SsdSim/x64/Release/Test.exe
