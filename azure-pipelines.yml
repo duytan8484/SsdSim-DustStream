@@ -7,7 +7,7 @@ resources:
       endpoint: 'Github connection 1'  # name of the service connection to use (for non-Azure Repos types)
 
 jobs:
-- job: 'Main'
+- job: 'Build'
   strategy:
     maxParallel: 2
     matrix: 
@@ -29,5 +29,16 @@ jobs:
     inputs:
       configuration: $(BuildConfiguration)
       platform: $(BuildPlatform)
+
+- job: 'Test'
+  strategy:
+    maxParallel: 2
+    matrix:
+      x64_Release:
+        TestExe: './SsdSim/x64/Release/Test.exe'
+      x64_Debug:
+        TestExe: './SsdSim/x64/Debug/Test.exe'
+  steps:
   - powershell: $(TestExe)
-    displayName: 'Running Tests'
+  displayName: 'Running Tests'
+  dependsOn: 'Build'
