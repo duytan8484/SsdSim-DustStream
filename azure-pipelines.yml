@@ -1,6 +1,6 @@
 resources:
   repositories:
-    - repository: string  # identifier (A-Z, a-z, 0-9, and underscore)
+    - repository: 'SsdSim'  # identifier (A-Z, a-z, 0-9, and underscore)
       type: github
       name: 'DustParticle/SsdSim'
       ref: 'refs/heads/master'  # ref name to use, defaults to 'refs/heads/master'
@@ -10,5 +10,7 @@ queue:
   name: Hosted VS2017
   demands: msbuild
 
+steps:
+- checkout: self
 - task: VSBuild@1
-    displayName: 'Build solution **/*.sln'
+  displayName: 'Build solution **/*.sln'
