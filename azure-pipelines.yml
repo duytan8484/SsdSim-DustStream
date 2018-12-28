@@ -16,11 +16,13 @@ jobs:
         BuildPlatform: x64
         TestExe: './SsdSim/x64/Release/Test.exe'
         ArtifactPath: './SsdSim/x64/Release/'
+        ArtifactName: 'x64_Release'
       x64_Debug:
         BuildConfiguration: debug
         BuildPlatform: x64
         TestExe: './SsdSim/x64/Debug/Test.exe'
         ArtifactPath: './SsdSim/x64/Debug/'
+        ArtifactName: 'x64_Debug'
   steps:
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
@@ -33,7 +35,7 @@ jobs:
       platform: $(BuildPlatform)
   - task: PublishPipelineArtifact@0
     inputs:
-      artifactName: 'drop'$(BuildConfiguration)
+      artifactName: $(ArtifactName)
       targetPath: $(ArtifactPath)
 
 - job: Test
