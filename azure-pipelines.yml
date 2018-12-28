@@ -2,7 +2,7 @@ resources:
   repositories:
     - repository: string  # identifier (A-Z, a-z, 0-9, and underscore)
       type: github
-      name: 'https://github.com/DustParticle/SsdSim'
+      name: 'DustParticle/SsdSim'
       ref: 'refs/heads/master'  # ref name to use, defaults to 'refs/heads/master'
       endpoint: 'Github connection 1'  # name of the service connection to use (for non-Azure Repos types)
 
