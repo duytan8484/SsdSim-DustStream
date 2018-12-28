@@ -9,7 +9,7 @@ resources:
 jobs:
 - job: 'Main'
   strategy:
-    maxParallel: 2
+    maxParallel: 1
     matrix: 
       x64_Release:
         BuildConfiguration: release
