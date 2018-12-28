@@ -8,6 +8,15 @@ resources:
 
 jobs:
 - job: 'Main'
+  strategy:
+    maxParallel: 2
+    matrix: 
+      x64_Release:
+        BuildConfiguration: release
+        BuidPlatform: x64
+      x64_Debug:
+        BuildConfiguration: debug
+        BuidPlatform: x64
   steps:
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
@@ -16,7 +25,7 @@ jobs:
   - task: VSBuild@1
     displayName: 'Build solution **/*.sln'
     inputs:
-      configuration: release
-      platform: x64
+      configuration: $(BuildConfiguration)
+      platform: $(BuildPlatform)
   - powershell: ./SsdSim/x64/Release/Test.exe
     displayName: 'Running Tests'
