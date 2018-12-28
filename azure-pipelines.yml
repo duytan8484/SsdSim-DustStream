@@ -47,10 +47,10 @@ jobs:
     matrix:
       x64_Release:
         ArtifactName: 'x64Release'
-        TestExe: $(System.DefaultWorkingDirectory)'Test.exe'
+        TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
       x64_Debug:
         ArtifactName: 'x64Debug'
-        TestExe: $(System.DefaultWorkingDirectory)'Test.exe'
+        TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
   steps:
   - task: DownloadPipelineArtifact@0
     inputs:
