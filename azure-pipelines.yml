@@ -12,5 +12,7 @@ queue:
 
 steps:
 - checkout: self
+- powershell: |
+    git clone https://github.com/DustParticle/SsdSim.git
 - task: VSBuild@1
   displayName: 'Build solution **/*.sln'
