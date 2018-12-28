@@ -57,5 +57,4 @@ jobs:
       artifactName: $(ArtifactName)
       targetPath: $(System.DefaultWorkingDirectory)
   - powershell: $(TestExe)
-  displayName: 'Running Tests'
   
