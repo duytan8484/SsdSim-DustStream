@@ -1,2 +1,2 @@
 jobs:
-- template: $(JobName)
+- template: azure-pipelines.yml
