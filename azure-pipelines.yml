@@ -1,6 +1,11 @@
 
 jobs:
-- job: Test
+- job: Test1
+  condition: eq(variables['JobName'], 'Test1')
   steps:
-  - script: echo Hello $(JobName) and $(System.DefaultWorkingDirectory)
-  
+  - script: echo Hello TEST NUMBER 1
+
+- job: Test2
+  condition: eq(variables['JobName'], 'Test2')
+  steps:
+  - script: echo Hello TEST NUMBER 2
