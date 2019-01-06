@@ -1,6 +1,6 @@
 jobs:
 - job: Test1
-    condition: eq(variables['JobName'], 'Test1')
-    steps:
-    - script: echo Hello TEST NUMBER 1
+  condition: eq(variables['JobName'], 'Test1')
+  steps:
+  - script: echo Hello TEST NUMBER 1
 
