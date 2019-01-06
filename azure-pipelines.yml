@@ -1,11 +1,11 @@
 jobs:
 - job: BUILD
-	condition: eq(variables['JobName'], 'BUILD')
-	test
+condition: eq(variables['JobName'], 'BUILD')
+test
 
 - job: UNIT-TEST
-	condition: eq(variables['JobName'], 'UNIT-TEST')
-	strategy:
+condition: eq(variables['JobName'], 'UNIT-TEST')
+strategy:
     maxParallel: 2
     matrix:
         x64_Release:
