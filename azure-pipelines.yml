@@ -1,6 +1,6 @@
 jobs:
-- job: UNIT-TEST
-  condition: eq(variables['JobName'], 'UNIT-TEST')
+- job: UNIT_TEST
+  condition: eq(variables['JobName'], 'UNIT_TEST')
   strategy:
     maxParallel: 2
     matrix:
