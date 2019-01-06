@@ -1,8 +1,4 @@
 jobs:
-- job: BUILD
-condition: eq(variables['JobName'], 'BUILD')
-test
-
 - job: UNIT-TEST
 condition: eq(variables['JobName'], 'UNIT-TEST')
 strategy:
