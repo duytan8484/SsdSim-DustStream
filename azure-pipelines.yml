@@ -1,19 +1,6 @@
 jobs:
 - job: Test1
     condition: eq(variables['JobName'], 'Test1')
-    strategy:
-        maxParallel: 2
-        matrix:
-            x64_Release:
-                ArtifactName: 'x64Release'
-                TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
-            x64_Debug:
-                ArtifactName: 'x64Debug'
-                TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
     steps:
-    - task: DownloadPipelineArtifact@0
-        inputs:
-            artifactName: $(ArtifactName)
-            targetPath: $(System.DefaultWorkingDirectory)
-    - powershell: $(TestExe)
+    - script: echo Hello TEST NUMBER 1
 
