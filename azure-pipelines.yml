@@ -1,1 +1,23 @@
-TANLE TEST COMMIT FROM RIVERFLOW
+jobs:
+- job: BUILD
+	condition: eq(variables['JobName'], 'BUILD')
+	test
+
+- job: UNIT-TEST
+	condition: eq(variables['JobName'], 'UNIT-TEST')
+	strategy:
+    maxParallel: 2
+    matrix:
+        x64_Release:
+            ArtifactName: 'x64Release'
+            TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
+        x64_Debug:
+            ArtifactName: 'x64Debug'
+            TestExe: $(System.DefaultWorkingDirectory)'/Test.exe'
+steps:
+- task: DownloadPipelineArtifact@0
+    inputs:
+        artifactName: $(ArtifactName)
+        targetPath: $(System.DefaultWorkingDirectory)
+- powershell: $(TestExe)
+
