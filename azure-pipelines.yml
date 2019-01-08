@@ -2,5 +2,7 @@ jobs:
 - job: BUILD
   condition: eq(variables['JobName'], 'BUILD')
   steps:
+  steps:
   - script: printenv
+  - script: ls
 
