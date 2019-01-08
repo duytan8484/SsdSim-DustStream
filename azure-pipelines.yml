@@ -1,14 +1,8 @@
 jobs:
 - job: BUILD
   strategy:
-    maxParallel: 2
+    maxParallel: 1
     matrix: 
-      x64_Release:
-        BuildConfiguration: release
-        BuildPlatform: x64
-        TestExe: './SsdSim/x64/Release/Test.exe'
-        ArtifactPath: './SsdSim/x64/Release/'
-        ArtifactName: 'x64Release'
       x64_Debug:
         BuildConfiguration: debug
         BuildPlatform: x64
