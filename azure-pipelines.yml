@@ -36,16 +36,5 @@ jobs:
         ArtifactName: 'x64Debug'
   steps:
   - script: git clone https://github.com/DustParticle/SsdSim.git
-  - task: NuGetCommand@2
-    inputs:
-      command: 'restore'
-  - task: VSBuild@1
-    displayName: 'Build solution **/*.sln'
-    inputs:
-      configuration: $(BuildConfiguration)
-      platform: $(BuildPlatform)
-  - task: PublishPipelineArtifact@0
-    inputs:
-      artifactName: $(ArtifactName)
-      targetPath: $(ArtifactPath)
+  - script: printenv
 
