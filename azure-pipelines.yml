@@ -5,6 +5,6 @@ jobs:
   - script: printenv
   - script: ls
   - task: Grunt@0
-  inputs:
-    gruntFile: example.js
+    inputs:
+      gruntFile: example.js
 
