@@ -1,5 +1,6 @@
 jobs:
 - job: BUILD
+  condition: eq(variables['JobName'], 'BUILD')
   steps:
   - script: printenv
 
