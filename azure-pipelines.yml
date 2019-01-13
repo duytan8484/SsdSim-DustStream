@@ -4,4 +4,5 @@ jobs:
   steps:
   - script: printenv
   - script: ls
+  - script: 'npm install'
   - script: 'node example.js'
