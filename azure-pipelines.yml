@@ -2,7 +2,6 @@ jobs:
 - job: BUILD
   condition: eq(variables['JobName'], 'BUILD')
   steps:
-  - script: printenv
-  - script: ls
-  - script: 'npm install'
-  - script: 'node example.js'
+  - script: |
+     npm install
+     node example.js
