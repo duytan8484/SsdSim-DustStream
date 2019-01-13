@@ -4,7 +4,4 @@ jobs:
   steps:
   - script: printenv
   - script: ls
-  - task: Grunt@0
-    inputs:
-      gruntFile: example.js
-
+  - script: 'node example.js'
