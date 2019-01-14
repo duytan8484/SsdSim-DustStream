@@ -17,7 +17,7 @@ jobs:
     inputs:
       artifactName: x64Release
       targetPath: ./SsdSim/x64/Release/
-    - script: 'node updateEndJob.js'
+  - script: 'node updateEndJob.js'
 
 
 - job: UNIT_TEST
@@ -30,6 +30,6 @@ jobs:
       artifactName: x64Release
       targetPath: $(System.DefaultWorkingDirectory)
   - powershell: $(System.DefaultWorkingDirectory)'/Test.exe'
-    - script: 'node updateEndJob.js'
+  - script: 'node updateEndJob.js'
 
 
