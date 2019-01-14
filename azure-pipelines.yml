@@ -1,7 +1,33 @@
 jobs:
-- job: BUILD
-  condition: eq(variables['JobName'], 'BUILD')
+- job: BUILD_SSDSIM
+  condition: eq(variables['JobName'], 'BUILD_SSDSIM')
   steps:
-  - script: |
-     npm install
-     node example.js
+  - script: 'npm install'
+  - script: 'node updateBeginJob.js'
+  - script: git clone https://github.com/DustParticle/SsdSim.git
+  - task: NuGetCommand@2
+    inputs:
+      command: 'restore'
+  - task: VSBuild@1
+    displayName: 'Build solution **/*.sln'
+    inputs:
+      configuration: release
+      platform: x64
+  - task: PublishPipelineArtifact@0
+    inputs:
+      artifactName: x64Release
+      targetPath: ./SsdSim/x64/Release/  - script: 'node updateEndJob.js'
+
+
+- job: UNIT_TEST
+  condition: eq(variables['JobName'], 'UNIT_TEST')
+  steps:
+  - script: 'npm install'
+  - script: 'node updateBeginJob.js'
+  - task: DownloadPipelineArtifact@0
+    inputs:
+      artifactName: x64Release
+      targetPath: $(System.DefaultWorkingDirectory)
+  - powershell: $(System.DefaultWorkingDirectory)'/Test.exe'  - script: 'node updateEndJob.js'
+
+
