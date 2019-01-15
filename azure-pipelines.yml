@@ -13,12 +13,10 @@ jobs:
     inputs:
       configuration: release
       platform: x64
-  - task: PublishBuildArtifacts@1
+  - task: PublishPipelineArtifact@0
     inputs:
-      PathtoPublish: ./SsdSim/x64/Release/
-      ArtifactName: ssdsimpackage
-      publishLocation: FilePath
-      TargetPath: '\\my\share\artifacts'
+      artifactName: x64Release
+      targetPath: ./SsdSim/x64/Release/
   - script: 'node updateEndJob.js'
 
 
@@ -27,12 +25,12 @@ jobs:
   steps:
   - script: 'npm install'
   - script: 'node updateBeginJob.js'
-  - task: DownloadFileshareArtifacts@1
+  - task: DownloadPipelineArtifact@0
     inputs:
-      filesharePath: '\\my\share\artifacts'
-      artifactName: ssdsimpackage
-  - powershell: ls $(System.ArtifactsDirectory)
-  - powershell: $(System.ArtifactsDirectory)'/Test.exe'
+      pipelineId: '$(build.buildid) - 1'
+      artifactName: x64Release
+      targetPath: $(System.DefaultWorkingDirectory)
+  - powershell: $(System.DefaultWorkingDirectory)'/Test.exe'
   - script: 'node updateEndJob.js'
 
 
