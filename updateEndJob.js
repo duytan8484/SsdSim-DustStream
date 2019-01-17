@@ -9,7 +9,7 @@ function updateStatus(endpoint, configuration, status, callback) {
         json: true,
         body: configuration,
         headers: {
-            'x-api-key': '0I_xh&qh1?,1DBz>lZ]bIwNisc,aB83+_XaC):7M!cG6w:dRK}]Q}dCE9VIijq>f'
+            'x-api-key': process.argv[2]
         }
     }, callback);
 }
