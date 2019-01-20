@@ -13,10 +13,10 @@ jobs:
     inputs:
       configuration: release
       platform: x64
-  - task: PublishPipelineArtifact@0
+  - task: PublishBuildArtifacts@1
     inputs:
       artifactName: x64Release
-      targetPath: ./SsdSim/x64/Release/
+      pathtoPublish: ./SsdSim/x64/Release/
   - script: 'node updateEndJob.js "$(RiverflowApiKey)"'
 
 
@@ -25,12 +25,16 @@ jobs:
   steps:
   - script: 'npm install'
   - script: 'node updateBeginJob.js "$(RiverflowApiKey)"'
-  - task: DownloadPipelineArtifact@0
+  - task: DownloadBuildArtifacts@0
     inputs:
-      pipelineId: '$(build.buildid) - 1'
+      buildType: 'specific'
+      project: 'SsdSim'
+      pipeline: 'SsdSim-CI'
+      buildVersionToDownload: 'specific'
+      buildId: $(AzureDevopsBuildID)
       artifactName: x64Release
-      targetPath: $(System.DefaultWorkingDirectory)
-  - powershell: $(System.DefaultWorkingDirectory)'/Test.exe'
+      downloadPath: $(System.DefaultWorkingDirectory)
+  - powershell: 'x64Release/Test.exe'
   - script: 'node updateEndJob.js "$(RiverflowApiKey)"'
 
 
