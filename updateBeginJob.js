@@ -20,6 +20,9 @@ var riverflowConfiguration = JSON.parse(process.env.RIVERFLOWCONFIGURATION);
 // Update link for to console log
 riverflowConfiguration.consoleLog = "   ";
 
+// Update Build ID
+riverflowConfiguration.azBuildID = process.env.BUILD_BUILDID;
+
 updateStatus(riverflowEndpoint, riverflowConfiguration, 'InProgress', function (error, response, body) {
     if (!error && response.statusCode == 200) {
         // Do nothing here
