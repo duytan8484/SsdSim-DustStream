@@ -4,6 +4,7 @@ jobs:
   steps:
   - script: 'npm install'
   - script: 'node updateBeginJob.js "$(RiverflowApiKey)"'
+  - script: 'printenv'
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
     inputs:
@@ -25,13 +26,14 @@ jobs:
   steps:
   - script: 'npm install'
   - script: 'node updateBeginJob.js "$(RiverflowApiKey)"'
+  - script: 'printenv'
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
       project: 'SsdSim'
       pipeline: 'SsdSim-CI'
       buildVersionToDownload: 'specific'
-      buildId: $(AzureDevopsBuildID)
+      buildId: 344
       artifactName: x64Release
       downloadPath: $(System.DefaultWorkingDirectory)
   - powershell: 'x64Release/Test.exe'
