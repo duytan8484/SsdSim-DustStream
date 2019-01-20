@@ -33,7 +33,7 @@ jobs:
       project: 'SsdSim'
       pipeline: 'SsdSim-CI'
       buildVersionToDownload: 'specific'
-      buildId: 344
+      buildId: $(AZUREDEVOPSBUILDID)
       artifactName: x64Release
       downloadPath: $(System.DefaultWorkingDirectory)
   - powershell: 'x64Release/Test.exe'
