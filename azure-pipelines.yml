@@ -10,8 +10,7 @@ jobs:
   - script: 'npm install'
   - script: 'printenv'
   - script: |
-      AZUREDEVOPSBUILDID=$(Build.ContainerId)
-      echo "##vso[task.setvariable variable=AZUREDEVOPSBUILDID;isOutput=true] Storing AZUREDEVOPSBUILDID"
+      echo "##vso[task.setvariable variable=AZUREDEVOPSBUILDID;isOutput=true]$(Build.ContainerId)"
     name: stepSetAzureDevopsBuildID
   - script: |
       echo "$(stepSetAzureDevopsBuildID.AZUREDEVOPSBUILDID)"
