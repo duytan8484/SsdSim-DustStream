@@ -28,7 +28,6 @@ jobs:
   dependsOn: BUILD_SSDSIM
   pool:
     name: Hosted Windows Container
-  condition: eq(variables['JobName'], 'UNIT_TEST')
   steps:
   - script: 'npm install'
   - script: 'printenv'
