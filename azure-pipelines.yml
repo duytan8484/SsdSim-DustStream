@@ -25,7 +25,7 @@ jobs:
 
 
 - job: UNIT_TEST
-  dependsOn: Phase_1
+  dependsOn: BUILD_SSDSIM
   pool:
     name: Hosted Windows Container
   condition: eq(variables['JobName'], 'UNIT_TEST')
