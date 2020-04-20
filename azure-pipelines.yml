@@ -1,5 +1,12 @@
 jobs:
 - job: BUILD_SSDSIM
+  condition: eq(variables['JobName'], 'BUILD_SSDSIM')
+  pool:
+    name: Hosted VS2017
+    demands:
+    - msbuild
+    - visualstudio
+    - vstest
   steps:
   - script: 'npm install'
   - script: 'printenv'
@@ -19,6 +26,7 @@ jobs:
 
 
 - job: UNIT_TEST
+  condition: eq(variables['JobName'], 'UNIT_TEST')
   steps:
   - script: 'npm install'
   - script: 'printenv'
