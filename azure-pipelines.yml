@@ -9,7 +9,7 @@ jobs:
   steps:
   - script: 'npm install'
   - script: 'printenv'
-  - script: echo '##vso[task.setvariable variable=AZUREDEVOPSBUILDID;isOutput=true]$(Build.ContainerId)
+  - script: echo '##vso[task.setvariable variable=AZUREDEVOPSBUILDID;isOutput=true]$(Build.BuildId)
     name: stepSetAzureDevopsBuildID
   - script: |
       echo "$(stepSetAzureDevopsBuildID.AZUREDEVOPSBUILDID)"
