@@ -27,6 +27,7 @@ jobs:
       artifactName: x64Release
       pathtoPublish: ./SsdSim/x64/Release/
   - script: echo $(Agent.JobStatus)
+    condition: always() # this step will always run, even if the pipeline is failed or cannceled
 
 - job: UNIT_TEST
   dependsOn: BUILD_SSDSIM
@@ -51,6 +52,7 @@ jobs:
       buildId: $(AZUREDEVOPSBUILDID)
       artifactName: x64Release
       downloadPath: $(System.DefaultWorkingDirectory)
-  - powershell: 'x64Release/Test.exe'
+  - powershell: ./Test.exe
+    workingDirectory: $(System.DefaultWorkingDirectory)/x64Release
   - script: echo $(Agent.JobStatus)
-
+    condition: always() # this step will always run, even if the pipeline is failed or cannceled
