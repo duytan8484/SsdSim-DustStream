@@ -29,7 +29,7 @@ var configuration = {
 };
 
 var jobParams = {
-    jobId: process.env.BUILD_BUILDNUMBER,
+    jobId: process.env.BUILD_BUILDID + '|' + process.env.BUILD_BUILDNUMBER,
     jobName: process.env.AGENT_JOBNAME,
     projectName: "IO", // Temperary hardcode project name
     commitSet: "", // TODO: Need to re-define commit set
