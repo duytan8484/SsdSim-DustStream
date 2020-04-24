@@ -8,11 +8,12 @@ jobs:
     - vstest
   steps:
   - script: 'npm install'
-  - script: 'printenv'
+  - script: 'node updateJobStatus.js "InProgress"'
+    env:
+      MAPPED_API_KEY: $(WaterfallsApiKey)
+    condition: always() # this step will always run, even if the pipeline is failed or cannceled
   - script: echo '##vso[task.setvariable variable=AZUREDEVOPSBUILDID;isOutput=true]$(Build.BuildId)
     name: stepSetAzureDevopsBuildID
-  - script: |
-      echo "$(stepSetAzureDevopsBuildID.AZUREDEVOPSBUILDID)"
   - script: git clone https://github.com/DustParticle/SsdSim.git
   - task: NuGetCommand@2
     inputs:
@@ -26,7 +27,9 @@ jobs:
     inputs:
       artifactName: x64Release
       pathtoPublish: ./SsdSim/x64/Release/
-  - script: echo $(Agent.JobStatus)
+  - script: 'node updateJobStatus.js $(Agent.JobStatus)'
+    env:
+      MAPPED_API_KEY: $(WaterfallsApiKey)
     condition: always() # this step will always run, even if the pipeline is failed or cannceled
 
 - job: UNIT_TEST
@@ -42,7 +45,10 @@ jobs:
     - vstest
   steps:
   - script: 'npm install'
-  - script: 'printenv'
+  - script: 'node updateJobStatus.js "InProgress"'
+    env:
+      MAPPED_API_KEY: $(WaterfallsApiKey)
+    condition: always() # this step will always run, even if the pipeline is failed or cannceled
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'specific'
@@ -54,5 +60,7 @@ jobs:
       downloadPath: $(System.DefaultWorkingDirectory)
   - powershell: ./Test.exe
     workingDirectory: $(System.DefaultWorkingDirectory)/x64Release
-  - script: echo $(Agent.JobStatus)
+  - script: 'node updateJobStatus.js $(Agent.JobStatus)'
+    env:
+      MAPPED_API_KEY: $(WaterfallsApiKey)
     condition: always() # this step will always run, even if the pipeline is failed or cannceled
