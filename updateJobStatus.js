@@ -29,13 +29,13 @@ var configuration = {
 };
 
 var jobParams = {
-    jobId: process.env.BUILD_BUILDID + '|' + process.env.BUILD_BUILDNUMBER,
+    jobId: process.env.AGENT_JOBNAME + '|' + process.env.BUILD_BUILDNUMBER + '|' + configuration.Configuration,
     jobName: process.env.AGENT_JOBNAME,
     projectName: "IO", // Temperary hardcode project name
     commitSet: "", // TODO: Need to re-define commit set
     lastCommitPayload: lastCommitPayload,
     ciConfiguration: configuration,
-    configName: "Default", // Hardcode "Default"
+    configName: configuration.Configuration,
     additionalConfiguration: '',
     revisionNumber: process.env.BUILD_BUILDID,
 };
